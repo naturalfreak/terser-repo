@@ -1,0 +1,45 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "application",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/alex.makedonski93/application-backend.git"
+  },
+  "main": "dist/server.js",
+  "scripts": {
+    "prestart:dev": "npm run clean",
+    "prebuild": "npm run clean",
+    "prestart:prod": "npm install && npm run build",
+    "build": "npm run webpack:server:local",
+    "build:prod": "npm run webpack:server:prod",
+    "start": "node dist/server.js",
+    "start:dev": "nodemon dist/server.js & npm run webpack:server:watch",
+    "start:prod": "pm2 start ./dist/server.js --name 'application-backend'",
+    "stop:prod": "pm2 stop --name 'application-backend'",
+    "webpack:server:local": "webpack --config webpack.server.config.js --progress --colors --server=local",
+    "webpack:server:prod": "webpack --config webpack.server.config.js --progress --colors --server=production",
+    "webpack:server:watch": "webpack --config webpack.server.config.js --progress --colors --server=local --watch",
+    "clean": "rimraf ./dist"
+  },
+  "keywords": [
+    "application"
+  ],
+  "author": "alexander makedonski",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.3.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^2.7.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.2.3",
+    "@types/node": "^12.7.2",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}
